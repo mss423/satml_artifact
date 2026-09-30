@@ -1,0 +1,28 @@
+CVEs published 2026-03-01 .. 2026-08-31: 49,813
+
+  carry a CVSS 3.1 score : 44,905 (90%)
+  carry a CVSS 4.0 score : 15,102 (30%)
+  carry both             : 12,125
+
+  CVSS 3.1 assigned by NVD itself : 9,253
+  CVSS 4.0 assigned by NVD itself : 0
+
+  who assigns 4.0:
+    4,208  disclosure@vulncheck.com
+    3,630  cna@vuldb.com
+    2,631  security-advisories@github.com
+      245  ics-cert@hq.dhs.gov
+      220  cvd@cert.pl
+      214  6b3ad84c-e1a6-4bf7-a703-f496b71e49db
+      190  security@joomla.org
+      144  vultures@jpcert.or.jp
+
+When the same CVE carries both versions, the score moves:
+  all                          n=12,125  mean -0.72  median -0.50  higher 38% / lower 60% / same 2%
+  confidentiality_only         n=1,751  mean +0.36  median +0.70  higher 72% / lower 28% / same 0%
+  scored_low_under_31          n=  557  mean -0.34  median -0.80  higher 23% / lower 77% / same 0%
+  low_and_confidentiality_only n=  181  mean -0.10  median -0.80  higher 29% / lower 70% / same 1%
+  SAME-SOURCE all              n=8,935  mean -0.69  median -0.50  higher 38% / lower 60% / same 2%
+  SAME-SOURCE confidentiality_only n=1,209  mean +0.53  median +0.70  higher 77% / lower 22% / same 0%
+  SAME-SOURCE scored_low_under_31 n=  611  mean -0.47  median -0.80  higher 20% / lower 80% / same 0%
+  SAME-SOURCE low_and_conf_only n=  181  mean -0.17  median -0.80  higher 26% / lower 72% / same 1%

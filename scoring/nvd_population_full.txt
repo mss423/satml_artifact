@@ -1,0 +1,14 @@
+# NVD temporal-metric population, FULL window (not a sample). Run 2026-09-24.
+# Command: python3 lit/measurements/nvd_temporal_population.py --offsets 0,2000,4000,6000,8000,10000,12000,14000,16000
+# Supersedes the 2-page convenience sample (offsets 0,9000; 4,000 CVEs; 0 of 4,126 v3.x).
+Window 2026-01-01..2026-03-31: 16255 CVEs in NVD; sampled 16255
+
+CVSS v3.x scores parsed:        18596
+  Temporal (E/RL/RC) populated: 0 (0.00%)
+CVSS v4.0 scores parsed:        5775
+  Threat  Exploit Maturity (E): 1855 (32.12%)
+  Supplemental Automatable(AU): 154 (2.67%)
+  Supplemental Resp. Effort(RE):143 (2.48%)
+
+  E values assigned: {'P': 1555, 'U': 291, 'A': 9}
+  E populated by:    {'CNA': 1855}

@@ -1,0 +1,45 @@
+% L1 (Heard) flash trajectory — vector twin of flash_l1.png.
+% Reads flash_l1.dat (written by flash_l1.py). Preamble is scaffold/main.tex.
+\begin{tikzpicture}
+\begin{axis}[
+  width=8.8cm, height=5.7cm,
+  axis lines*=left,
+  xmin=0.55, xmax=6.45, ymin=-6, ymax=120,
+  xtick={1,2,3,4,5,6}, xticklabels={2.5,3.0,3.5,3.6,3.7,3.8},
+  ytick={0,25,50,75,100}, yticklabel={\pgfmathprintnumber{\tick}\%},
+  xlabel={Gemini flash Checkpoint (Release Order $\rightarrow$)},
+  ylabel={Success Rate (\%)},
+  ymajorgrids, grid style={black!12, line width=0.4pt},
+  tick style={black!55}, tick align=outside,
+  legend style={at={(0.5,-0.26)}, anchor=north, legend columns=2,
+                draw=none, fill=none, cells={anchor=west}, font=\small,
+                /tikz/every even column/.append style={column sep=12pt}},
+  clip=false,
+]
+  % Clopper-Pearson 95% bands; K* is the least level whose LOWER bound clears
+  % the join-only null, which is why 3.5-flash at K1 (16.7%, lower bound 0.4%)
+  % sits above the line without clearing it.
+  % Error bars removed at the author's request (2026-09-23). K* still uses the
+  % Clopper-Pearson lower bound; the intervals are in flash_l1.dat and Appendix B.
+  \addplot[black!55, dotted, line width=1.3pt, forget plot]
+    coordinates {(0.55,7.10) (6.45,7.10)};
+  \node[anchor=south west, font=\small, text=black!50]
+    at (axis cs:0.62,7.10) {join-only null $=7.1\%$};
+  \addplot[c0, line width=1.2pt, mark=*, mark size=2.2pt,
+           mark options={fill=c0, draw=white}]
+    table[x=xidx, y=k2] {flash_l1.dat};
+  \addplot[c3, line width=1.2pt, mark=*, mark size=2.2pt,
+           mark options={fill=c3, draw=white}]
+    table[x=xidx, y=k1] {flash_l1.dat};
+  \legend{K2: specification public (Kerckhoffs), K1: CVE name only}
+  % K* ladder
+  \node[anchor=east, font=\small\itshape, text=black!50]
+    at (axis cs:0.80,113) {$K^\star$:};
+  \node[font=\small, text=black!40] at (axis cs:1,113) {$>$K2};
+  \node[font=\small, text=black!40] at (axis cs:2,113) {K2};
+  \node[font=\small, text=black!40] at (axis cs:3,113) {K2};
+  \node[font=\small, text=black!40] at (axis cs:4,113) {K2};
+  \node[font=\small, text=black!40] at (axis cs:5,113) {K2};
+  \node[font=\small, text=c3] at (axis cs:6,113) {K1};
+\end{axis}
+\end{tikzpicture}

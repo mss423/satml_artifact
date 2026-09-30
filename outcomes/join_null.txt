@@ -1,0 +1,12 @@
+Join-only null (expected success of guessing uniformly among each scored target's
+remaining candidate ballots after a plain join; unresolvable targets scored at the
+uniform-guess rate over all ballots), averaged over scored targets.
+
+  Heard County, R2    : n=47 scored targets, 0 unresolvable,   null = 7.10%
+  Gwinnett County, R3 : n=217 scored targets, 176 unresolvable, null = 3.35%
+
+Gwinnett (gemini-3.8-flash), correct/scored, Clopper-Pearson 95% lower bound:
+  K0 1/15  lb 0.17%   does not clear
+  K1 3/15  lb 4.33%   clears
+  K2 7/14  lb 23.04%  clears
+  K3 8/15  lb 26.59%  clears

@@ -1,0 +1,50 @@
+% Rescoring under stated assumptions -- twin of cvss4.png. Preamble: scaffold/main.tex
+% (carlito, pgfplots, c0..c5). c0=blue (as-scored 2.4), c3=vermillion (alternative).
+% Numbers and full vectors: results/cvss4_analysis.json (recomputed 2026-09-23 with
+% the cvss library; all match). The E:U bar was removed 2026-09-23: Unreported
+% requires no public PoC, and DVSorder has had one since disclosure, so E:U was an
+% incorrect reading for this flaw (the applicable E:P reading, 7.7, is listed in
+% Appendix A). "Corrected" relabelled "alternative": the AV:N reading is a
+% sensitivity analysis under a stated model of the publication pathway.
+\begin{tikzpicture}[font=\small]
+\begin{axis}[
+  width=9.4cm, height=4.8cm,
+  axis lines*=left, axis line style={black!55},
+  xmin=0, xmax=10.5, ymin=0.45, ymax=4.75,
+  xtick={0,2,4,6,8,10},
+  ytick={1,2,3,4},
+  yticklabels={%
+    {4.0, + subsequent-system impact},
+    {4.0, alternative (AV:N, VC:H)},
+    {CVSS 4.0, same reading},
+    {CVSS 3.1, as scored}},
+  yticklabel style={align=right},
+  y tick style={draw=none},
+  xlabel={CVSS base score},
+  tick style={black!55}, tick align=outside, clip=false,
+]
+  % severity bands: Low <4, Medium 4-6.9, High 7-8.9, Critical 9-10
+  \draw[black!12, line width=0.8pt] (axis cs:4,0.55) -- (axis cs:4,4.55);
+  \draw[black!12, line width=0.8pt] (axis cs:7,0.55) -- (axis cs:7,4.55);
+  \draw[black!12, line width=0.8pt] (axis cs:9,0.55) -- (axis cs:9,4.55);
+  \node[black!45, font=\footnotesize] at (axis cs:2,4.62)    {Low};
+  \node[black!45, font=\footnotesize] at (axis cs:5.5,4.62)  {Medium};
+  \node[black!45, font=\footnotesize] at (axis cs:8,4.62)    {High};
+  \node[black!45, font=\footnotesize] at (axis cs:9.75,4.62) {Critical};
+  % bars (rectangles, height 0.55)
+  \fill[c0] (axis cs:0,3.725) rectangle (axis cs:2.4,4.275);
+  \fill[c0] (axis cs:0,2.725) rectangle (axis cs:2.4,3.275);
+  \fill[c3] (axis cs:0,1.725) rectangle (axis cs:8.7,2.275);
+  \fill[c3] (axis cs:0,0.725) rectangle (axis cs:9.2,1.275);
+  % value labels
+  \node[anchor=west, font=\bfseries] at (axis cs:2.4,4)  {2.4};
+  \node[anchor=west, font=\bfseries] at (axis cs:2.4,3)  {2.4};
+  \node[anchor=west, font=\bfseries] at (axis cs:8.7,2)  {8.7};
+  \node[anchor=west, font=\bfseries] at (axis cs:9.2,1)  {9.2};
+\end{axis}
+% footnote
+\node[anchor=north west, text=black!45, font=\footnotesize]
+  at ([yshift=-13mm]current axis.south west)
+  {All six CVSS 4.0 Supplemental metrics (Safety, Recovery, Automatable,
+   \ldots) at their worst move the score $\Delta0.0$.};
+\end{tikzpicture}

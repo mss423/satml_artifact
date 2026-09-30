@@ -1,0 +1,124 @@
+{
+ "cve": "CVE-2022-48506",
+ "published": "2023-06-19",
+ "last_modified": "2026-06-17",
+ "scored_under_v40": false,
+ "ssvc": {
+  "exploitation": "none",
+  "automatable": "no",
+  "technicalImpact": "partial"
+ },
+ "variants": [
+  {
+   "label": "as scored, CVSS 3.1 (2023)",
+   "short": "3.1 \u00b7 as scored, 2023",
+   "vector": "CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+   "version": "3.1",
+   "score": 2.4,
+   "severity": "Low",
+   "takeaway": "the published score"
+  },
+  {
+   "label": "the same reading, expressed in 4.0",
+   "short": "4.0 \u00b7 same reading",
+   "vector": "CVSS:4.0/AV:P/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+   "version": "4.0",
+   "score": 2.4,
+   "severity": "Low",
+   "takeaway": "upgrading the version changes nothing"
+  },
+  {
+   "label": "4.0, physical reading kept, impact corrected",
+   "short": "4.0 \u00b7 impact corrected only",
+   "vector": "CVSS:4.0/AV:P/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+   "version": "4.0",
+   "score": 5.1,
+   "severity": "Medium",
+   "takeaway": "impact alone moves it 2.7 points"
+  },
+  {
+   "label": "4.0, corrected: reachable over the network",
+   "short": "4.0 \u00b7 corrected (AV:N, VC:H)",
+   "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+   "version": "4.0",
+   "score": 8.7,
+   "severity": "High",
+   "takeaway": "the files are downloaded, not touched in person"
+  },
+  {
+   "label": "4.0, corrected + subsequent-system impact",
+   "short": "4.0 \u00b7 + subsequent impact",
+   "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N",
+   "version": "4.0",
+   "score": 9.2,
+   "severity": "Critical",
+   "takeaway": "the harmed party is not the scanner"
+  },
+  {
+   "label": "4.0, corrected + no observed exploitation (E:U)",
+   "short": "4.0 \u00b7 + no observed exploit",
+   "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:U",
+   "version": "4.0",
+   "score": 6.6,
+   "severity": "Medium",
+   "takeaway": "invisibility is scored as safety"
+  },
+  {
+   "label": "4.0, corrected + public exploit code (E:P)",
+   "short": "4.0 \u00b7 + public exploit code",
+   "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:P",
+   "version": "4.0",
+   "score": 7.7,
+   "severity": "High",
+   "takeaway": "a PoC has existed since 2022"
+  },
+  {
+   "label": "4.0, corrected + every supplemental metric at its worst",
+   "short": "4.0 \u00b7 + all supplemental maxed",
+   "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/S:P/AU:Y/R:I/V:C/RE:H/U:Red",
+   "version": "4.0",
+   "score": 8.7,
+   "severity": "High",
+   "takeaway": "six alarms, zero effect on the score"
+  }
+ ],
+ "supplemental": [
+  {
+   "metric": "S",
+   "name": "Safety",
+   "value": "P \u2014 Present",
+   "why": "ballot secrecy protects against coercion and retaliation"
+  },
+  {
+   "metric": "AU",
+   "name": "Automatable",
+   "value": "Y \u2014 Yes",
+   "why": "one script processed 112 counties; CISA recorded 'no'"
+  },
+  {
+   "metric": "R",
+   "name": "Recovery",
+   "value": "I \u2014 Irrecoverable",
+   "why": "a disclosed ballot cannot be un-disclosed"
+  },
+  {
+   "metric": "V",
+   "name": "Value Density",
+   "value": "C \u2014 Concentrated",
+   "why": "one download yields an entire county"
+  },
+  {
+   "metric": "RE",
+   "name": "Response Effort",
+   "value": "H \u2014 High",
+   "why": "six institutional gates from vendor to polling place"
+  },
+  {
+   "metric": "U",
+   "name": "Provider Urgency",
+   "value": "Red",
+   "why": "the highest urgency the metric can express"
+  }
+ ],
+ "supplemental_effect_on_score": 0.0
+}

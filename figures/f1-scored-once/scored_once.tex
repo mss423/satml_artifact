@@ -1,0 +1,68 @@
+% F1 scored-once (timeline) — twin of scored_once.png. Preamble: scaffold/main.tex
+% (carlito, pgfplots, c0..c5). c0=blue (as scored), c3=vermillion (corrected).
+% The CVSS-vector critique is now a separate figure: ../cvss-vector/cvss_vector.tex.
+\begin{tikzpicture}[font=\small]
+\begin{axis}[
+  name=tl, width=13.2cm, height=6.4cm,
+  axis lines*=left, axis line style={black!55},
+  xmin=2022.2, xmax=2027, ymin=0, ymax=10,
+  xtick={2023,2024,2025,2026}, xticklabels={2023,2024,2025,2026},
+  ytick={0,2.4,5,8.7,10}, yticklabel style={/pgf/number format/precision=1},
+  ylabel={CVSS Base Score},
+  tick style={black!55}, tick align=outside,
+  ymajorgrids, grid style={black!8}, clip=false,
+]
+  % Alternative reading drawn as a curve (2026-09-24). The 8.7 is a static
+  % re-score under the stated network-reachable assumption (a sensitivity
+  % analysis, not a correction) and was equally available at publication.
+  % The rise is anchored at gemini-3-flash-preview (Gemini 3 Flash), released
+  % 17 Dec 2025 (blog.google/products/gemini/gemini-3-flash), the earliest flash
+  % checkpoint whose recovery clears the join-only null: K2, 3 of 6, CP lower
+  % bound 11.8% > 7.1% (flash_l1.dat, Heard R2). Second marker: a public report of
+  % 3 Aug 2026, a commercial coding agent given the
+  % vulnerability paper built a statewide pipeline "within a couple of hours";
+  % the report that prompted re-examining the score.
+  % (gemini-2.5-pro anchor, 1 of 5, dropped 2026-09-23: 0 of 6 on replication.)
+  \addplot[name path=base, draw=none] coordinates {(2022.2,2.4)(2027,2.4)};
+  \addplot[name path=corr, draw=none, samples=300, domain=2022.2:2027]
+    {2.4 + 6.3/(1+exp(-(x-2025.96)/0.05))};
+  \addplot[c3, opacity=0.08] fill between[of=base and corr];
+  \addplot[c3, dashed, line width=1.1pt, samples=300, domain=2022.2:2027]
+    {2.4 + 6.3/(1+exp(-(x-2025.96)/0.05))};
+  \node[anchor=south east, c3] at (axis cs:2026.95,8.7)
+    {alternative reading, network-reachable: 8.7\ \ HIGH};
+  % Gemini 3 Flash, on the rise
+  \fill[c3] (axis cs:2025.96,5.55) circle (2.4pt);
+  \node[c3, anchor=east, align=right, font=\footnotesize] (gem)
+    at (axis cs:2025.72,6.1)
+    {Dec 2025: Gemini 3 Flash recovers a named\\voter's ballot from the
+     published\\specification (3 of 6 attempts)};
+  \draw[c3, line width=0.7pt] (gem.east) -- (axis cs:2025.925,5.6);
+  % coding-agent report, on the plateau
+  \fill[c3] (axis cs:2026.59,8.7) circle (2.4pt);
+  \node[c3, anchor=north west, align=left, font=\footnotesize] (agent)
+    at (axis cs:2026.30,8.2)
+    {Aug 2026: a coding agent builds\\a statewide pipeline in hours};
+  \draw[c3, line width=0.7pt] (agent.north -| {axis cs:2026.59,0}) -- (axis cs:2026.59,8.62);
+  \draw[c3, <->, line width=0.9pt] (axis cs:2026.2,2.62) -- (axis cs:2026.2,8.55);
+  \node[c3, anchor=west, align=left] at (axis cs:2026.24,4.4)
+    {the gap\\left open};
+  \addplot[c0, line width=2.2pt] coordinates {(2022.2,2.4)(2027,2.4)};
+  \node[anchor=west, c0] at (axis cs:2022.28,1.15)
+    {as scored: CVSS 2.4\ \ LOW --- assigned once, never revised};
+  % numbered markers on the line (explicit — \foreach breaks with axis cs)
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2022.65,2.4) {1};
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2023.20,2.4) {2};
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2023.47,2.4) {3};
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2025.02,2.4) {4};
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2026.30,2.4) {5};
+  \node[circle,fill=c0,text=white,font=\scriptsize\bfseries,inner sep=1.3pt] at (axis cs:2026.62,2.4) {6};
+\end{axis}
+
+% numbered key, centred under the timeline
+\node[anchor=north, text=black!45, font=\footnotesize]
+  at ([yshift=-8mm]tl.south) {%
+  1 disclosed to vendor \quad 2 firmware certified \quad
+  3 CVE published, 2.4 LOW \quad 4 CISA SSVC ``automatable: no'' \quad
+  5 flaw still present \quad 6 NVD edited, unchanged};
+\end{tikzpicture}

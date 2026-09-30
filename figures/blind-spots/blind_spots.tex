@@ -1,0 +1,61 @@
+% Figure 2 (blind spots) — twin of blind_spots.png, rebuilt in the paper-figure
+% style to match F1. Preamble: scaffold/main.tex (carlito, c0..c5). c2=green
+% (visible exploitation, fast remediation), c3=vermillion (limited visibility,
+% slow remediation; relabelled 2026-09-23 -- DVSorder IS scored, so "neither scored" was wrong). x: remediation time;
+% y: exploitation signal. \includegraphics this PDF at \columnwidth in the paper.
+% The star is drawn as a manual polar path (scaffold has no shapes.geometric).
+\begin{tikzpicture}[font=\scriptsize,>=latex]
+  \def\W{6.4}\def\H{4.7}
+
+  % quadrant shading
+  \fill[c2!14]  (0,\H/2)  rectangle (\W/2,\H);
+  \fill[c3!14]  (\W/2,0)  rectangle (\W,\H/2);
+  \draw[dashed,black!25] (\W/2,0) -- (\W/2,\H);
+  \draw[dashed,black!25] (0,\H/2) -- (\W,\H/2);
+
+  % axes
+  \draw[->,black!55] (0,0) -- (\W+0.4,0);
+  \draw[->,black!55] (0,0) -- (0,\H+0.4);
+  \node[below,font=\tiny,black!55] at (0.7,-0.10)     {days};
+  \node[below,font=\tiny,black!55] at (\W-0.5,-0.10)  {decades};
+  \node[below,font=\tiny,black!70] at (\W/2,-0.52)
+        {remediation time $\longrightarrow$};
+  \node[left,font=\tiny,black!55] at (-0.06,\H-0.12)  {observable};
+  \node[left,font=\tiny,black!55] at (-0.06,0.24)     {silent};
+  \node[rotate=90,font=\tiny,black!70] at (-0.95,\H/2)
+        {exploitation signal $\longrightarrow$};
+
+  % quadrant labels
+  \node[font=\scriptsize\bfseries,text=c2!60!black,align=center]
+        at (1.55,4.35) {visible exploitation;\\fast remediation};
+  \node[font=\scriptsize\bfseries,text=c3!85!black,align=right,anchor=east]
+        at (6.35,2.36) {limited visibility;\\slow remediation};
+
+  % fast + observable
+  \foreach \x/\y/\lab in {0.45/3.85/browsers,
+                          0.90/3.35/{Android fleet},
+                          1.45/2.90/enterprise IT,
+                          2.05/2.55/{open-source deps}} {
+    \fill[c2!80!black] (\x,\y) circle (2.0pt);
+    \node[font=\tiny,black!70,anchor=west] at (\x+0.14,\y) {\lab};
+  }
+
+  % slow + silent
+  \foreach \x/\y/\lab in {3.55/1.95/{vehicle fleet},
+                          4.15/1.55/{federal legacy IT},
+                          4.75/1.15/medical devices,
+                          5.35/0.78/{OT \& ICS}} {
+    \fill[c3!85!black] (\x,\y) circle (2.0pt);
+    \node[font=\tiny,black!70,anchor=west] at (\x+0.14,\y) {\lab};
+  }
+
+  % the case: 5-point star (manual polar path; outer r=0.26, inner r=0.104)
+  \begin{scope}[shift={(5.85,0.40)}]
+    \fill[c3,draw=white,line width=0.3pt]
+      (90:0.26) -- (126:0.104) -- (162:0.26) -- (198:0.104) -- (234:0.26)
+      -- (270:0.104) -- (306:0.26) -- (342:0.104) -- (18:0.26) -- (54:0.104)
+      -- cycle;
+  \end{scope}
+  \node[font=\tiny\bfseries,text=c3!85!black,anchor=east] at (5.58,0.40)
+        {election scanners};
+\end{tikzpicture}

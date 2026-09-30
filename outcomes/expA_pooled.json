@@ -1,0 +1,9 @@
+{
+  "counties_ok": 52,
+  "counties_with_certain": 52,
+  "pooled_certain": "6387/6387",
+  "pooled_certain_recall": 1.0,
+  "pooled_ordered_agree": "118247/118269",
+  "pooled_spurious": 16839,
+  "still_failed": []
+}

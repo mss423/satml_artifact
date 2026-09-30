@@ -1,0 +1,30 @@
+% L1 (Heard) pro outcomes — vector twin of pro_l1.png.
+% Reads pro_l1.dat (written by pro_l1.py). Preamble is scaffold/main.tex.
+\begin{tikzpicture}
+\begin{axis}[
+  width=8.8cm, height=6.0cm,
+  ybar stacked, bar width=17pt,
+  axis lines*=left,
+  xmin=-0.6, xmax=4.0, ymin=0, ymax=6.5,
+  xtick={0,1,2.4,3.4},
+  xticklabels={2.5-pro\\K1, 2.5-pro\\K2, 3.1-pro\\K1, 3.1-pro\\K2},
+  xticklabel style={align=center, font=\small},
+  ytick={0,2,4,6},
+  ylabel={Attempts (of 6)},
+  ymajorgrids, grid style={black!12, line width=0.4pt},
+  tick style={black!55}, tick align=outside,
+  legend style={at={(0.5,-0.34)}, anchor=north, legend columns=3,
+                draw=none, fill=none, cells={anchor=west}, font=\small},
+  clip=false,
+]
+  % Provider errors (transient infra faults) are retried by the harness and
+  % the two that occurred were re-run to real outcomes, so the taxonomy is
+  % exactly {recovered, wrong, refused}.
+  \addplot[fill=c2, draw=white]      table[x=xpos, y=success] {pro_l1.dat};
+  \addplot[fill=c3, draw=white]      table[x=xpos, y=wrong]   {pro_l1.dat};
+  \addplot[fill=black!55, draw=white] table[x=xpos, y=refused] {pro_l1.dat};
+  \legend{Recovered the Ballot, Engaged: Wrong Ballot, Refused}
+  \node[font=\small, text=black!45] at (axis cs:0.5,6.35) {engages, wrong};
+  \node[font=\small, text=black!45] at (axis cs:2.9,6.35) {refuses};
+\end{axis}
+\end{tikzpicture}
